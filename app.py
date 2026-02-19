@@ -22,28 +22,32 @@ def upload():
     images_per_page = int(request.form.get("images_per_page", 1))
 
     if not file or not file.filename.endswith(".pdf"):
-        return jsonify({"error": "Please upload a valid PDF"}), 400
+        return jsonify({"error": "Please upload a valid PDF file."}), 400
 
     input_path = os.path.join(UPLOAD_FOLDER, file.filename)
-    output_path = os.path.join(OUTPUT_FOLDER, f"images_{file.filename}")
+    output_filename = f"extracted_{file.filename}"
+    output_path = os.path.join(OUTPUT_FOLDER, output_filename)
 
     file.save(input_path)
 
     try:
         extract_images_to_pdf(input_path, output_path, images_per_page)
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 422
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": f"Processing failed: {str(e)}"}), 500
 
-    return jsonify({"download_url": f"/download/{os.path.basename(output_path)}"})
+    return jsonify({"download_url": f"/download/{output_filename}"})
 
 
 @app.route("/download/<filename>")
 def download(filename):
-    return send_file(os.path.join(OUTPUT_FOLDER, filename), as_attachment=True)
+    file_path = os.path.join(OUTPUT_FOLDER, filename)
+    if not os.path.exists(file_path):
+        return jsonify({"error": "File not found."}), 404
+    return send_file(file_path, as_attachment=True)
 
 
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
