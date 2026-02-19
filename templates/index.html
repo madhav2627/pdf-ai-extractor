@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF Image Extractor</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header class="hero">
+        <h1>Extract Images from PDFs</h1>
+        <p>Upload your PDF and generate a clean image-only document instantly.</p>
+    </header>
+
+    <div class="card">
+
+        <div class="upload-area" id="uploadArea">
+            <input type="file" id="fileInput" hidden>
+            <div class="upload-content">
+                <div class="icon">📄</div>
+                <p>Drag & drop your PDF</p>
+                <span>or click to browse</span>
+            </div>
+        </div>
+
+        <div id="fileName" class="file-name hidden"></div>
+
+        <div class="options">
+            <label>Images per page</label>
+            <select id="imagesPerPage">
+                <option value="1">1 per page</option>
+                <option value="2">2 per page</option>
+                <option value="4">4 per page</option>
+                <option value="6">6 per page</option>
+            </select>
+        </div>
+
+        <button id="extractBtn">Extract Images</button>
+
+        <div class="progress hidden" id="progress">
+            <div class="progress-bar"></div>
+        </div>
+
+       <div id="status" class="status"></div>
+
+<div id="resultCard" class="result hidden">
+    <div class="success-icon">✓</div>
+    <h3>Your PDF is ready</h3>
+    <p>Download your image-only document below.</p>
+    <a id="downloadBtn" class="download-btn">Download PDF</a>
+</div>
+
+
+    </div>
+
+</div>
+
+<script src="/static/js/script.js"></script>
+</body>
+</html>
