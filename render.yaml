@@ -2,13 +2,14 @@ services:
   - type: web
     name: pdf-ai-extractor
     env: python
+    pythonVersion: "3.11.9"
     buildCommand: |
       apt-get update
       apt-get install -y libjpeg-dev zlib1g-dev
       pip install -r requirements.txt
+      pip install --upgrade setuptools && pip install -r requirements.txt
     startCommand: gunicorn app:app
     files:
       - app.py
       - utils/pdf_processor.py
       - requirements.txt
-      
