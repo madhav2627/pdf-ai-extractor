@@ -1,2 +1,6 @@
-outputs/
+venv/
+__pycache__/
+*.pyc
 uploads/
+outputs/
+.env
