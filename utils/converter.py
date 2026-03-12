@@ -23,7 +23,6 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image
-import pytesseract
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
