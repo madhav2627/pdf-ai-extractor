@@ -2,10 +2,16 @@
 config.py — Central settings for Student PDF Toolkit.
 """
 import os
+import tempfile
 
 # ── Folders ────────────────────────────────────────────────────────────────
-UPLOAD_FOLDER = "uploads"
-OUTPUT_FOLDER = "outputs"
+if "VERCEL" in os.environ or "AWS_LAMBDA_FUNCTION_NAME" in os.environ:
+    base_dir = tempfile.gettempdir()
+    UPLOAD_FOLDER = os.path.join(base_dir, "uploads")
+    OUTPUT_FOLDER = os.path.join(base_dir, "outputs")
+else:
+    UPLOAD_FOLDER = "uploads"
+    OUTPUT_FOLDER = "outputs"
 
 # ── File security ──────────────────────────────────────────────────────────
 MAX_FILE_MB    = 200

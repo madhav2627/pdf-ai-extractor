@@ -15,6 +15,8 @@ import os
 import logging
 from pathlib import Path
 
+import config
+
 from flask import (
     Blueprint, render_template, request,
     send_file, jsonify, after_this_request,
@@ -40,7 +42,7 @@ converter_bp = Blueprint(
 )
 
 # Temporary upload staging directory (separate from the output TEMP_DIR)
-UPLOAD_STAGING = Path("uploads") / "converter_staging"
+UPLOAD_STAGING = Path(config.UPLOAD_FOLDER) / "converter_staging"
 UPLOAD_STAGING.mkdir(parents=True, exist_ok=True)
 
 
