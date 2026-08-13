@@ -53,11 +53,6 @@
         <span class="nav-dot" style="--dc:#34d399"></span>
         <span class="nav-text">Text Extractor</span>
       </button>
-      <button class="nav-item" data-tool="ocr">
-        <span class="nav-dot" style="--dc:#60a5fa"></span>
-        <span class="nav-text">OCR Scanner</span>
-        {% if not ocr_available %}<span class="nav-pill">setup needed</span>{% endif %}
-      </button>
 
       <div class="nav-group-label">Manage</div>
       <button class="nav-item" data-tool="merge">
@@ -111,7 +106,7 @@
             Student PDF Toolkit — 8 tools in one place
           </div>
           <h1 class="home-title">Every PDF tool<br>you'll ever <em>need.</em></h1>
-          <p class="home-desc">Extract images & text, run OCR, merge, split, compress, convert between formats, and generate study flashcards — all for free.</p>
+          <p class="home-desc">Extract images & text, merge, split, compress, convert between formats, and generate study flashcards — all for free.</p>
         </header>
 
         <div class="tools-grid">
@@ -135,18 +130,6 @@
             <div class="tc-body">
               <h3>Text Extractor</h3>
               <p>Extract all readable text and download as a .txt file</p>
-            </div>
-            <div class="tc-arrow">→</div>
-          </button>
-
-          <button class="tool-card" data-tool="ocr">
-            <div class="tc-glow" style="--gc:96,165,250"></div>
-            <div class="tc-icon" style="--ic:#60a5fa;--ib:rgba(96,165,250,.1)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>
-            </div>
-            <div class="tc-body">
-              <h3>OCR Scanner</h3>
-              <p>Recognize text inside scanned or image-based PDFs</p>
             </div>
             <div class="tc-arrow">→</div>
           </button>
@@ -209,7 +192,7 @@
             </div>
             <div class="tc-body">
               <h3>File Converter <span class="new-badge" style="background:rgba(0,220,180,.15);color:#00dcb4;border-color:rgba(0,220,180,.3)">NEW</span></h3>
-              <p>Convert PDF ↔ DOCX, TXT, Images — plus JPG/PNG to PDF and OCR text extraction</p>
+              <p>Convert PDF ↔ DOCX, TXT, Images — plus JPG/PNG to PDF</p>
             </div>
             <div class="tc-arrow">→</div>
           </button>
@@ -341,63 +324,6 @@
             <div class="download-bar">
               <div class="download-info"><span class="dl-check">✓</span><span>Text file ready</span></div>
               <a id="txtDownloadBtn" class="download-btn" download>Download .txt</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ═══════════════════ OCR ═══════════════════════════ -->
-      <section class="tool-section" id="tool-ocr">
-        <header class="hero">
-          <div class="hero-tag" style="--tc:#60a5fa;--tb:rgba(96,165,250,.08);--tbd:rgba(96,165,250,.22)">
-            <span class="htag-dot" style="background:#60a5fa"></span>Image → Text
-          </div>
-          <h1>OCR <em style="color:#60a5fa">Scanner</em><br>for Scanned PDFs</h1>
-          <p>Recognize and extract text from scanned documents and image-based PDFs using optical character recognition.</p>
-        </header>
-        <div class="card">
-          {% if not ocr_available %}
-          <div class="info-banner">
-            <svg viewBox="0 0 20 20" fill="currentColor" width="15" style="flex-shrink:0;color:#60a5fa"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
-            <span><strong>OCR requires Tesseract.</strong> Run: <code>pip install pytesseract</code> and install <a href="https://tesseract-ocr.github.io/tessdoc/Installation.html" target="_blank" rel="noopener">Tesseract OCR →</a></span>
-          </div>
-          {% endif %}
-          <div class="upload-area" id="ocrUploadArea">
-            <input type="file" id="ocrFileInput" hidden accept=".pdf">
-            <div class="upload-content">
-              <div class="upload-icon" style="--uc:#60a5fa;--ub:rgba(96,165,250,.1)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-              </div>
-              <p class="upload-title">Drop your scanned PDF</p>
-              <span class="upload-sub">or <u>click to browse</u> — image-based PDFs</span>
-            </div>
-          </div>
-          <div id="ocrFileName" class="file-badge hidden">
-            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
-            <span id="ocrFileNameText"></span>
-            <button class="clear-btn" id="ocrClearBtn">✕</button>
-          </div>
-          <button class="btn-primary" style="--bc:#60a5fa;--bcs:#93c5fd" id="ocrRunBtn">
-            <span>Run OCR</span>
-            <svg viewBox="0 0 20 20" fill="currentColor" width="17"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-          </button>
-          <div id="ocrProgress" class="progress-simple hidden"><div class="spinner" style="--sc:#60a5fa"></div><span>Running OCR — this may take a moment…</span></div>
-          <div id="ocrError" class="error-msg hidden"></div>
-          <div id="ocrResult" class="result-section hidden">
-            <div class="stat-chips" id="ocrStats"></div>
-            <div class="text-block">
-              <div class="text-block-bar">
-                <span class="tb-label">Recognized Text</span>
-                <button class="icon-btn" id="ocrCopyBtn">
-                  <svg viewBox="0 0 20 20" fill="currentColor" width="13"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/></svg>
-                  Copy
-                </button>
-              </div>
-              <textarea id="ocrOutput" class="text-output" readonly placeholder="OCR text will appear here…"></textarea>
-            </div>
-            <div class="download-bar">
-              <div class="download-info"><span class="dl-check">✓</span><span>OCR text ready</span></div>
-              <a id="ocrDownloadBtn" class="download-btn" download>Download .txt</a>
             </div>
           </div>
         </div>

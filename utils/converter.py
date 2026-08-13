@@ -6,7 +6,6 @@ Supported conversions:
   DOCX → PDF
   TXT  → PDF
   JPG/PNG → PDF
-  JPG/PNG → TXT  (OCR via Tesseract)
 
 All public functions return:
   {"ok": True,  "path": "/abs/path/to/output", "filename": "result.xyz"}
@@ -23,12 +22,12 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image
+
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
-import pytesseract
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
 
 log = logging.getLogger(__name__)
 
@@ -46,9 +45,9 @@ OUTPUT_FORMATS: dict[str, list[str]] = {
     ".pdf":  ["docx", "txt", "images"],
     ".docx": ["pdf"],
     ".txt":  ["pdf"],
-    ".jpg":  ["pdf", "txt"],
-    ".jpeg": ["pdf", "txt"],
-    ".png":  ["pdf", "txt"],
+    ".jpg":  ["pdf"],
+    ".jpeg": ["pdf"],
+    ".png":  ["pdf"],
 }
 
 
@@ -96,9 +95,6 @@ def convert(input_path: str, output_format: str) -> dict:
             (".jpg",  "pdf"):    _image_to_pdf,
             (".jpeg", "pdf"):    _image_to_pdf,
             (".png",  "pdf"):    _image_to_pdf,
-            (".jpg",  "txt"):    _image_to_txt,
-            (".jpeg", "txt"):    _image_to_txt,
-            (".png",  "txt"):    _image_to_txt,
         }
         fn = dispatch.get((ext, output_format))
         if fn is None:
@@ -289,23 +285,6 @@ def _image_to_pdf(src: Path) -> dict:
     img.thumbnail((a4_w_px, a4_h_px), Image.LANCZOS)
 
     img.save(str(out), "PDF", resolution=96)
-    return _ok(out)
-
-
-# ── JPG/PNG → TXT (OCR) ───────────────────────────────────────────────────
-def _image_to_txt(src: Path) -> dict:
-    out = _tmp_path(src.stem + "_ocr", ".txt")
-
-    img  = Image.open(src)
-    text = pytesseract.image_to_string(img, lang="eng")
-
-    if not text.strip():
-        return _err(
-            "No text could be detected in the image. "
-            "Make sure the image contains printed or typed text."
-        )
-
-    out.write_text(text, encoding="utf-8")
     return _ok(out)
 
 

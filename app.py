@@ -2,13 +2,12 @@
 app.py — Student PDF Toolkit
 ────────────────────────────
 Tools:
-  1. Image Extractor  (original)
+  1. Image Extractor
   2. Text Extractor
-  3. OCR
-  4. PDF Merger
-  5. PDF Splitter
-  6. PDF Compressor
-  7. Flashcard Generator
+  3. PDF Merger
+  4. PDF Splitter
+  5. PDF Compressor
+  6. Flashcard Generator
 """
 
 import os
@@ -24,7 +23,7 @@ from flask_limiter.util import get_remote_address
 import config
 from utils.pdf_processor    import extract_and_build
 from utils.text_extractor   import extract_text
-from utils.ocr_processor    import ocr_pdf, OCR_AVAILABLE
+
 from utils.pdf_merger       import merge_pdfs
 from utils.pdf_splitter     import split_pdf
 from utils.pdf_compressor   import compress_pdf
@@ -112,7 +111,7 @@ def _save_upload(file) -> tuple[str, str | None]:
 
 @app.route("/")
 def index():
-    return render_template("index.html", ocr_available=OCR_AVAILABLE)
+    return render_template("index.html")
 
 
 # ── 1. Image Extractor ─────────────────────────────────────────────────────
@@ -215,48 +214,7 @@ def extract_text_route():
         _safe_delete(input_path)
 
 
-# ── 3. OCR ─────────────────────────────────────────────────────────────────
-
-@app.route("/ocr", methods=["POST"])
-@limiter.limit(config.RATE_LIMIT)
-def ocr_route():
-    _cleanup_old_files()
-
-    if not OCR_AVAILABLE:
-        return jsonify({"error": "OCR is not available on this server (pytesseract not installed)."}), 503
-
-    file = request.files.get("file")
-    safe_name, input_path = _save_upload(file)
-    if not input_path:
-        return jsonify({"error": "Only PDF files are accepted."}), 400
-
-    if not _is_pdf_magic(input_path):
-        _safe_delete(input_path)
-        return jsonify({"error": "Not a valid PDF."}), 400
-
-    try:
-        result = ocr_pdf(input_path)
-
-        txt_filename = f"ocr_{safe_name}.txt"
-        txt_path     = os.path.join(config.OUTPUT_FOLDER, txt_filename)
-        with open(txt_path, "w", encoding="utf-8") as f:
-            f.write(result["full_text"])
-
-        log.info("OCR: %d words from %d pages", result["word_count"], result["page_count"])
-        return jsonify({
-            "text":        result["full_text"],
-            "word_count":  result["word_count"],
-            "page_count":  result["page_count"],
-            "download_url": f"/download/{txt_filename}",
-        })
-    except Exception as exc:
-        log.exception("OCR error")
-        return jsonify({"error": f"OCR failed: {exc}"}), 500
-    finally:
-        _safe_delete(input_path)
-
-
-# ── 4. PDF Merger ──────────────────────────────────────────────────────────
+# ── 3. PDF Merger ──────────────────────────────────────────────────────────
 
 @app.route("/merge", methods=["POST"])
 @limiter.limit(config.RATE_LIMIT)

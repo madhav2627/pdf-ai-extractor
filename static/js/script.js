@@ -210,41 +210,7 @@ $id("txtExtractBtn").addEventListener("click", async () => {
 });
 
 // ══════════════════════════════════════════════════════════
-// 3. OCR
-// ══════════════════════════════════════════════════════════
-let ocrFile = null;
-
-makeDropZone("ocrUploadArea", "ocrFileInput", files => {
-  if (!isPDF(files[0])) { showErr("ocrError", "Only PDF files accepted."); return; }
-  ocrFile = files[0];
-  showBadge("ocrFileName", "ocrFileNameText", files[0].name);
-  hideErr("ocrError"); hideRes("ocrResult");
-});
-$id("ocrClearBtn").addEventListener("click", e => {
-  e.stopPropagation(); ocrFile = null; $id("ocrFileInput").value = "";
-  hideBadge("ocrFileName"); hideRes("ocrResult"); hideErr("ocrError");
-});
-copyTextToBtn("ocrOutput", "ocrCopyBtn");
-
-$id("ocrRunBtn").addEventListener("click", async () => {
-  if (!ocrFile) { showErr("ocrError", "Please select a PDF file first."); return; }
-  disableBtn("ocrRunBtn", true);
-  hideErr("ocrError"); hideRes("ocrResult"); showProg("ocrProgress");
-  const fd = new FormData(); fd.append("file", ocrFile);
-  try {
-    const res  = await fetch("/ocr", { method:"POST", body:fd });
-    const data = await res.json();
-    if (!res.ok || data.error) throw new Error(data.error || `Error ${res.status}`);
-    $id("ocrOutput").value = data.text;
-    $id("ocrStats").innerHTML = statChips([["Pages", data.page_count], ["Words", data.word_count.toLocaleString()]]);
-    $id("ocrDownloadBtn").href = data.download_url;
-    hideProg("ocrProgress"); showRes("ocrResult");
-  } catch (err) { hideProg("ocrProgress"); showErr("ocrError", err.message || "Something went wrong."); }
-  finally { disableBtn("ocrRunBtn", false); }
-});
-
-// ══════════════════════════════════════════════════════════
-// 4. MERGER
+// 3. MERGER
 // ══════════════════════════════════════════════════════════
 let mergeFiles = [];
 
@@ -286,7 +252,7 @@ $id("mergeRunBtn").addEventListener("click", async () => {
 });
 
 // ══════════════════════════════════════════════════════════
-// 5. SPLITTER
+// 4. SPLITTER
 // ══════════════════════════════════════════════════════════
 let splitFile = null;
 
@@ -321,7 +287,7 @@ $id("splitRunBtn").addEventListener("click", async () => {
 });
 
 // ══════════════════════════════════════════════════════════
-// 6. COMPRESSOR
+// 5. COMPRESSOR
 // ══════════════════════════════════════════════════════════
 let compressFile = null;
 
@@ -361,7 +327,7 @@ $id("compressRunBtn").addEventListener("click", async () => {
 });
 
 // ══════════════════════════════════════════════════════════
-// 7. FLASHCARDS
+// 6. FLASHCARDS
 // ══════════════════════════════════════════════════════════
 let fcFile = null, fcCards = [], fcIdx = 0;
 
