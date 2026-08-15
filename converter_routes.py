@@ -1,14 +1,12 @@
 """
 converter_routes.py
 ════════════════════
-Blueprint that wires the Universal File Converter into your Flask app.
-
-How to register in your main app.py:
-────────────────────────────────────
-    from converter_routes import converter_bp
-    app.register_blueprint(converter_bp)
-
-Then visit  /converter  in the browser.
+Blueprint providing Universal File Converter routes.
+Handles:
+  - PDF ↔ DOCX, TXT, Images (ZIP)
+  - Word (.docx) → PDF
+  - Text (.txt) → PDF
+  - Images (JPG, PNG, WebP) → PDF (single or multi-image)
 """
 
 import os
@@ -18,18 +16,20 @@ from pathlib import Path
 import config
 
 from flask import (
-    Blueprint, render_template, request,
-    send_file, jsonify, after_this_request,
+    Blueprint, redirect, render_template, request,
+    send_file, jsonify, after_this_request, url_for
 )
 from werkzeug.utils import secure_filename
 
 from utils.converter import (
     convert,
+    convert_multiple_images_to_pdf,
     cleanup,
     allowed_file,
     valid_output_formats,
     MAX_BYTES,
     TEMP_DIR,
+    TYPE_TO_FORMAT,
 )
 
 log = logging.getLogger(__name__)
@@ -41,19 +41,20 @@ converter_bp = Blueprint(
     static_folder="static",
 )
 
-# Temporary upload staging directory (separate from the output TEMP_DIR)
+# Temporary upload staging directory
 UPLOAD_STAGING = Path(config.UPLOAD_FOLDER) / "converter_staging"
 UPLOAD_STAGING.mkdir(parents=True, exist_ok=True)
 
 
-# ── Page ──────────────────────────────────────────────────────────────────
+# ── Page Route ────────────────────────────────────────────────────────────
 
 @converter_bp.route("/converter")
 def converter_page():
-    return render_template("converter.html")
+    """Redirect to the main student workspace with the converter tool active."""
+    return redirect("/?tool=converter")
 
 
-# ── Detect valid output formats ────────────────────────────────────────────
+# ── Detect valid output formats ───────────────────────────────────────────
 
 @converter_bp.route("/converter/formats", methods=["POST"])
 def get_formats():
@@ -62,7 +63,6 @@ def get_formats():
     Returns:  {"formats": ["docx", "txt", "images"]}
     """
     filename = ""
-
     if request.is_json:
         filename = request.json.get("filename", "")
     else:
@@ -79,19 +79,83 @@ def get_formats():
     return jsonify({"formats": formats})
 
 
-# ── Convert ────────────────────────────────────────────────────────────────
+# ── Convert Endpoint (Handles both /converter/convert and /convert) ────────
 
 @converter_bp.route("/converter/convert", methods=["POST"])
+@converter_bp.route("/convert", methods=["POST"])
 def do_convert():
     """
     Accepts multipart/form-data:
-        file          — the file to convert
-        output_format — target format string (e.g. "docx", "txt", "pdf")
-
-    Returns JSON on error, or the converted file as an attachment on success.
+        file / files      — uploaded file(s)
+        conversion_type   — e.g. "pdf-to-docx", "images-to-pdf", "docx-to-pdf"
+        OR output_format  — e.g. "docx", "txt", "pdf", "images"
     """
-    # ── Validate upload ───────────────────────────────────────────────────
+    conversion_type = request.form.get("conversion_type", "").strip().lower()
+    output_format = request.form.get("output_format", "").strip().lower()
+
+    # Resolve output format and mode if conversion_type was passed
+    if conversion_type:
+        if conversion_type in TYPE_TO_FORMAT:
+            _, target = TYPE_TO_FORMAT[conversion_type]
+            output_format = target
+        elif "-" in conversion_type:
+            output_format = conversion_type.split("-")[-1]
+
+    # Handle multi-file image conversion to PDF
+    if conversion_type == "images-to-pdf" or (output_format == "pdf" and "files" in request.files):
+        uploaded_files = request.files.getlist("files") or request.files.getlist("files[]") or request.files.getlist("file")
+        if not uploaded_files or not any(f.filename for f in uploaded_files):
+            return jsonify({"error": "Please select at least one image file."}), 400
+
+        staged_paths = []
+        try:
+            total_size = 0
+            for f in uploaded_files:
+                if not f or not f.filename:
+                    continue
+                safe_name = secure_filename(f.filename)
+                if not safe_name:
+                    continue
+                input_path = UPLOAD_STAGING / f"img_{len(staged_paths)}_{safe_name}"
+                f.save(str(input_path))
+                total_size += input_path.stat().st_size
+                staged_paths.append(str(input_path))
+
+            if total_size > MAX_BYTES:
+                return jsonify({"error": "Combined image files exceed the 100 MB limit."}), 413
+
+            if not staged_paths:
+                return jsonify({"error": "No valid image files were received."}), 400
+
+            result = convert_multiple_images_to_pdf(staged_paths, output_stem="combined_images")
+        finally:
+            for p in staged_paths:
+                try:
+                    Path(p).unlink(missing_ok=True)
+                except OSError:
+                    pass
+
+        if not result.get("ok"):
+            return jsonify({"error": result.get("error", "Images to PDF conversion failed.")}), 422
+
+        output_path = result["path"]
+        dl_name = result.get("filename", "converted.pdf")
+
+        @after_this_request
+        def _cleanup_multi(response):
+            cleanup(output_path)
+            return response
+
+        return send_file(output_path, as_attachment=True, download_name=dl_name)
+
+    # ── Single-file conversion ─────────────────────────────────────────────
     uploaded = request.files.get("file")
+    if not uploaded or not uploaded.filename:
+        # Check if sent under 'files'
+        files_list = request.files.getlist("files")
+        if files_list and files_list[0].filename:
+            uploaded = files_list[0]
+
     if not uploaded or not uploaded.filename:
         return jsonify({"error": "No file provided."}), 400
 
@@ -99,52 +163,46 @@ def do_convert():
         return jsonify({
             "error": (
                 "Unsupported file type. "
-                "Accepted: PDF, DOCX, TXT, JPG, PNG."
+                "Accepted formats: PDF, DOCX, TXT, JPG, PNG, WEBP."
             )
         }), 400
 
-    output_format = request.form.get("output_format", "").strip().lower()
     if not output_format:
         return jsonify({"error": "No output format specified."}), 400
 
-    # ── Save to staging ───────────────────────────────────────────────────
-    safe_name   = secure_filename(uploaded.filename)
-    input_path  = UPLOAD_STAGING / safe_name
+    safe_name = secure_filename(uploaded.filename)
+    input_path = UPLOAD_STAGING / safe_name
     uploaded.save(str(input_path))
 
-    # Double-check size after save (MAX_CONTENT_LENGTH may not be set globally)
     if input_path.stat().st_size > MAX_BYTES:
         input_path.unlink(missing_ok=True)
-        return jsonify({"error": "File exceeds the 50 MB size limit."}), 413
+        return jsonify({"error": "File exceeds the 100 MB limit."}), 413
 
-    # ── Run conversion ────────────────────────────────────────────────────
     try:
         result = convert(str(input_path), output_format)
     finally:
-        # Always remove the staged upload regardless of outcome
         try:
             input_path.unlink(missing_ok=True)
         except OSError:
             pass
 
-    if not result["ok"]:
-        return jsonify({"error": result["error"]}), 422
+    if not result.get("ok"):
+        return jsonify({"error": result.get("error", "Conversion failed.")}), 422
 
-    # ── Send file & schedule cleanup ──────────────────────────────────────
     output_path = result["path"]
-    dl_name     = result["filename"]
+    dl_name = result.get("filename", f"converted.{output_format}")
 
     @after_this_request
-    def _cleanup(response):
+    def _cleanup_single(response):
         cleanup(output_path)
         return response
 
-    log.info("Conversion complete: %s → %s", safe_name, dl_name)
+    log.info("Conversion successful: %s → %s", safe_name, dl_name)
     return send_file(output_path, as_attachment=True, download_name=dl_name)
 
 
-# ── Error handlers (scoped to blueprint) ──────────────────────────────────
+# ── Error handlers ────────────────────────────────────────────────────────
 
 @converter_bp.errorhandler(413)
 def too_large(_):
-    return jsonify({"error": "File too large. Maximum size is 50 MB."}), 413
+    return jsonify({"error": "File too large. Maximum size is 100 MB."}), 413

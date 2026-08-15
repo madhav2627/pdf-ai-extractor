@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student PDF Toolkit</title>
+<title>Student PDF Study Workspace</title>
+<meta name="description" content="Your personal PDF study assistant. Extract, summarize, quiz, take notes and study from your PDFs in one place.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -72,7 +73,49 @@
       <button class="nav-item" data-tool="flashcards">
         <span class="nav-dot" style="--dc:#e879f9"></span>
         <span class="nav-text">Flashcard Generator</span>
-        <span class="nav-pill nav-pill--new">new</span>
+      </button>
+      <button class="nav-item" data-tool="summary">
+        <span class="nav-dot" style="--dc:#f59e0b"></span>
+        <span class="nav-text">AI Summary</span>
+        <span class="nav-pill nav-pill--new">ai</span>
+      </button>
+      <button class="nav-item" data-tool="askpdf">
+        <span class="nav-dot" style="--dc:#60a5fa"></span>
+        <span class="nav-text">Ask PDF</span>
+        <span class="nav-pill nav-pill--new">ai</span>
+      </button>
+      <button class="nav-item" data-tool="notes">
+        <span class="nav-dot" style="--dc:#34d399"></span>
+        <span class="nav-text">Notes Generator</span>
+        <span class="nav-pill nav-pill--new">ai</span>
+      </button>
+      <button class="nav-item" data-tool="quiz">
+        <span class="nav-dot" style="--dc:#fb923c"></span>
+        <span class="nav-text">Quiz Generator</span>
+        <span class="nav-pill nav-pill--new">ai</span>
+      </button>
+      <button class="nav-item" data-tool="qanalyzer">
+        <span class="nav-dot" style="--dc:#a78bfa"></span>
+        <span class="nav-text">Question Analyzer</span>
+        <span class="nav-pill nav-pill--new">ai</span>
+      </button>
+
+      <div class="nav-group-label">Organise</div>
+      <button class="nav-item" data-tool="dashboard">
+        <span class="nav-dot" style="--dc:#f59e0b"></span>
+        <span class="nav-text">Dashboard</span>
+      </button>
+      <button class="nav-item" data-tool="planner">
+        <span class="nav-dot" style="--dc:#2dd4bf"></span>
+        <span class="nav-text">Study Planner</span>
+      </button>
+      <button class="nav-item" data-tool="syllabus">
+        <span class="nav-dot" style="--dc:#fb7185"></span>
+        <span class="nav-text">Syllabus Tracker</span>
+      </button>
+      <button class="nav-item" data-tool="bookmarks">
+        <span class="nav-dot" style="--dc:#fbbf24"></span>
+        <span class="nav-text">Bookmarks</span>
       </button>
 
       <div class="nav-group-label">Convert</div>
@@ -83,9 +126,8 @@
       </button>
     </nav>
 
-    <div class="sidebar-footer">
-      <svg viewBox="0 0 16 16" fill="currentColor" width="11" style="opacity:.4"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
-      Files auto-deleted after 30 min
+    <div class="privacy-notice">
+      🔒 Files processed server-side and auto-deleted after 30 min. Not stored permanently.
     </div>
   </aside>
 
@@ -103,9 +145,9 @@
         <header class="home-hero">
           <div class="home-eyebrow">
             <span class="eyebrow-pulse"></span>
-            Student PDF Toolkit — 8 tools in one place
+            Student PDF Study Workspace — 14 tools in one place
           </div>
-          <h1 class="home-title">Every PDF tool<br>you'll ever <em>need.</em></h1>
+          <h1 class="home-title">Your PDF.<br>Your Study <em>Assistant.</em></h1>
           <p class="home-desc">Extract images & text, merge, split, compress, convert between formats, and generate study flashcards — all for free.</p>
         </header>
 
@@ -115,10 +157,7 @@
             <div class="tc-icon" style="--ic:#a78bfa;--ib:rgba(167,139,250,.1)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             </div>
-            <div class="tc-body">
-              <h3>Image Extractor</h3>
-              <p>Pull every embedded image from a PDF into a clean download</p>
-            </div>
+            <div class="tc-body"><h3>Image Extractor</h3><p>Pull every embedded image from a PDF</p></div>
             <div class="tc-arrow">→</div>
           </button>
 
@@ -127,10 +166,70 @@
             <div class="tc-icon" style="--ic:#34d399;--ib:rgba(52,211,153,.1)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
             </div>
-            <div class="tc-body">
-              <h3>Text Extractor</h3>
-              <p>Extract all readable text and download as a .txt file</p>
+            <div class="tc-body"><h3>Text Extractor</h3><p>Extract all readable text as .txt</p></div>
+            <div class="tc-arrow">→</div>
+          </button>
+
+          <button class="tool-card" data-tool="summary">
+            <div class="tc-glow" style="--gc:245,158,11"></div>
+            <div class="tc-icon" style="--ic:#f59e0b;--ib:rgba(245,158,11,.1)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6M9 8h6M9 16h4M5 20h14a2 2 0 002-2V4a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
             </div>
+            <div class="tc-body"><h3>AI Summary <span class="new-badge" style="background:rgba(245,158,11,.12);color:#f59e0b;border-color:rgba(245,158,11,.3)">AI</span></h3><p>Short, detailed, or exam-focused summary</p></div>
+            <div class="tc-arrow">→</div>
+          </button>
+
+          <button class="tool-card" data-tool="askpdf">
+            <div class="tc-glow" style="--gc:96,165,250"></div>
+            <div class="tc-icon" style="--ic:#60a5fa;--ib:rgba(96,165,250,.1)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <div class="tc-body"><h3>Ask PDF <span class="new-badge" style="background:rgba(96,165,250,.12);color:#60a5fa;border-color:rgba(96,165,250,.3)">AI</span></h3><p>Chat with your PDF — get page references</p></div>
+            <div class="tc-arrow">→</div>
+          </button>
+
+          <button class="tool-card" data-tool="notes">
+            <div class="tc-glow" style="--gc:52,211,153"></div>
+            <div class="tc-icon" style="--ic:#34d399;--ib:rgba(52,211,153,.1)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <div class="tc-body"><h3>Notes Generator <span class="new-badge" style="background:rgba(52,211,153,.12);color:#34d399;border-color:rgba(52,211,153,.3)">AI</span></h3><p>Auto-generate study, exam, or revision notes</p></div>
+            <div class="tc-arrow">→</div>
+          </button>
+
+          <button class="tool-card" data-tool="quiz">
+            <div class="tc-glow" style="--gc:251,146,60"></div>
+            <div class="tc-icon" style="--ic:#fb923c;--ib:rgba(251,146,60,.1)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+            </div>
+            <div class="tc-body"><h3>Quiz Generator <span class="new-badge" style="background:rgba(251,146,60,.12);color:#fb923c;border-color:rgba(251,146,60,.3)">AI</span></h3><p>MCQ, True/False, and fill-in-blank quizzes</p></div>
+            <div class="tc-arrow">→</div>
+          </button>
+
+          <button class="tool-card" data-tool="flashcards">
+            <div class="tc-glow" style="--gc:232,121,249"></div>
+            <div class="tc-icon" style="--ic:#e879f9;--ib:rgba(232,121,249,.1)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+            </div>
+            <div class="tc-body"><h3>Flashcard Generator</h3><p>Interactive Q&amp;A study cards from your PDF</p></div>
+            <div class="tc-arrow">→</div>
+          </button>
+
+          <button class="tool-card" data-tool="qanalyzer">
+            <div class="tc-glow" style="--gc:167,139,250"></div>
+            <div class="tc-icon" style="--ic:#a78bfa;--ib:rgba(167,139,250,.1)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            </div>
+            <div class="tc-body"><h3>Question Analyzer <span class="new-badge" style="background:rgba(167,139,250,.12);color:#a78bfa;border-color:rgba(167,139,250,.3)">AI</span></h3><p>Find frequently asked topics in past papers</p></div>
+            <div class="tc-arrow">→</div>
+          </button>
+
+          <button class="tool-card" data-tool="planner">
+            <div class="tc-glow" style="--gc:45,212,191"></div>
+            <div class="tc-icon" style="--ic:#2dd4bf;--ib:rgba(45,212,191,.1)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="tc-body"><h3>Study Planner</h3><p>Day-by-day schedule from your PDF</p></div>
             <div class="tc-arrow">→</div>
           </button>
 
@@ -139,10 +238,7 @@
             <div class="tc-icon" style="--ic:#f97316;--ib:rgba(249,115,22,.1)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 6H21M8 12H21M8 18H21M3 6h.01M3 12h.01M3 18h.01"/></svg>
             </div>
-            <div class="tc-body">
-              <h3>PDF Merger</h3>
-              <p>Combine multiple PDFs into one seamless document</p>
-            </div>
+            <div class="tc-body"><h3>PDF Merger</h3><p>Combine multiple PDFs into one</p></div>
             <div class="tc-arrow">→</div>
           </button>
 
@@ -151,10 +247,7 @@
             <div class="tc-icon" style="--ic:#fb7185;--ib:rgba(251,113,133,.1)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3v18M18 3v18M3 12h18"/></svg>
             </div>
-            <div class="tc-body">
-              <h3>PDF Splitter</h3>
-              <p>Extract any page range into its own standalone file</p>
-            </div>
+            <div class="tc-body"><h3>PDF Splitter</h3><p>Extract any page range into a new PDF</p></div>
             <div class="tc-arrow">→</div>
           </button>
 
@@ -163,41 +256,21 @@
             <div class="tc-icon" style="--ic:#2dd4bf;--ib:rgba(45,212,191,.1)">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>
             </div>
-            <div class="tc-body">
-              <h3>PDF Compressor</h3>
-              <p>Shrink file size while keeping it readable and sharp</p>
-            </div>
-            <div class="tc-arrow">→</div>
-          </button>
-
-          <button class="tool-card tool-card--span" data-tool="flashcards">
-            <div class="tc-glow" style="--gc:232,121,249"></div>
-            <div class="tc-icon" style="--ic:#e879f9;--ib:rgba(232,121,249,.1)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M8 12h.01M12 12h.01M16 12h.01M8 16h8"/></svg>
-            </div>
-            <div class="tc-body">
-              <h3>Flashcard Generator <span class="new-badge">NEW</span></h3>
-              <p>Auto-generate interactive Q&A study cards from your lecture notes, textbooks, and papers</p>
-            </div>
+            <div class="tc-body"><h3>PDF Compressor</h3><p>Shrink file size, keep it readable</p></div>
             <div class="tc-arrow">→</div>
           </button>
 
           <button class="tool-card tool-card--span" data-tool="converter" style="text-decoration:none;background:none;border:none;cursor:pointer;width:100%;text-align:left">
             <div class="tc-glow" style="--gc:0,220,180"></div>
             <div class="tc-icon" style="--ic:#00dcb4;--ib:rgba(0,220,180,.1)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
-                <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
             </div>
-            <div class="tc-body">
-              <h3>File Converter <span class="new-badge" style="background:rgba(0,220,180,.15);color:#00dcb4;border-color:rgba(0,220,180,.3)">NEW</span></h3>
-              <p>Convert PDF ↔ DOCX, TXT, Images — plus JPG/PNG to PDF</p>
-            </div>
+            <div class="tc-body"><h3>File Converter <span class="new-badge" style="background:rgba(0,220,180,.15);color:#00dcb4;border-color:rgba(0,220,180,.3)">NEW</span></h3><p>Convert PDF ↔ DOCX, TXT, Images — plus images to PDF</p></div>
             <div class="tc-arrow">→</div>
           </button>
         </div>
       </section>
+
 
       <!-- ═══════════════════ IMAGE EXTRACTOR ══════════════ -->
       <section class="tool-section" id="tool-images">
@@ -549,234 +622,679 @@
       <section class="tool-section" id="tool-converter">
         <header class="hero">
           <div class="hero-tag" style="--tc:#00dcb4;--tb:rgba(0,220,180,.08);--tbd:rgba(0,220,180,.22)">
-            <span class="htag-dot" style="background:#00dcb4"></span>Convert Files
+            <span class="htag-dot" style="background:#00dcb4"></span>Universal File Converter
           </div>
           <h1>File <em style="color:#00dcb4">Converter</em><br>Any Format</h1>
-          <p>Convert PDF ↔ DOCX, PDF → TXT, PDF → Images, or combine images into a PDF — all in one place.</p>
+          <p>Convert PDF ↔ DOCX, TXT, Images, or compile multiple photos into a crisp PDF — fast, offline-ready & free.</p>
         </header>
+
         <div class="card">
           <!-- Conversion type picker -->
-          <div class="quality-picker" style="margin-bottom:1.25rem">
-            <div class="quality-label">Conversion type</div>
-            <div class="quality-options" style="flex-wrap:wrap;gap:.5rem">
-              <label class="quality-opt"><input type="radio" name="convType" value="pdf-to-docx" checked><span class="quality-card"><span class="qc-name">PDF → DOCX</span><span class="qc-desc">Word document</span></span></label>
-              <label class="quality-opt"><input type="radio" name="convType" value="pdf-to-txt"><span class="quality-card"><span class="qc-name">PDF → TXT</span><span class="qc-desc">Plain text</span></span></label>
-              <label class="quality-opt"><input type="radio" name="convType" value="pdf-to-images"><span class="quality-card"><span class="qc-name">PDF → Images</span><span class="qc-desc">PNG per page</span></span></label>
-              <label class="quality-opt"><input type="radio" name="convType" value="images-to-pdf"><span class="quality-card"><span class="qc-name">Images → PDF</span><span class="qc-desc">JPG / PNG</span></span></label>
+          <div class="converter-mode-section">
+            <div class="quality-label" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px">
+              Select Conversion Mode
+            </div>
+            <div class="converter-grid" id="convModeGrid">
+              <label class="conv-opt active" data-mode="pdf-to-docx">
+                <input type="radio" name="convType" value="pdf-to-docx" checked hidden>
+                <div class="conv-card">
+                  <div class="conv-badge">PDF → Word</div>
+                  <div class="conv-title">PDF to DOCX</div>
+                  <div class="conv-desc">Editable Word document</div>
+                </div>
+              </label>
+
+              <label class="conv-opt" data-mode="pdf-to-txt">
+                <input type="radio" name="convType" value="pdf-to-txt" hidden>
+                <div class="conv-card">
+                  <div class="conv-badge">PDF → Text</div>
+                  <div class="conv-title">PDF to TXT</div>
+                  <div class="conv-desc">Fast plain-text extract</div>
+                </div>
+              </label>
+
+              <label class="conv-opt" data-mode="pdf-to-images">
+                <input type="radio" name="convType" value="pdf-to-images" hidden>
+                <div class="conv-card">
+                  <div class="conv-badge">PDF → Images</div>
+                  <div class="conv-title">PDF to Images ZIP</div>
+                  <div class="conv-desc">High-res PNG per page</div>
+                </div>
+              </label>
+
+              <label class="conv-opt" data-mode="docx-to-pdf">
+                <input type="radio" name="convType" value="docx-to-pdf" hidden>
+                <div class="conv-card">
+                  <div class="conv-badge">Word → PDF</div>
+                  <div class="conv-title">DOCX to PDF</div>
+                  <div class="conv-desc">Formatted clean PDF</div>
+                </div>
+              </label>
+
+              <label class="conv-opt" data-mode="txt-to-pdf">
+                <input type="radio" name="convType" value="txt-to-pdf" hidden>
+                <div class="conv-card">
+                  <div class="conv-badge">Text → PDF</div>
+                  <div class="conv-title">TXT to PDF</div>
+                  <div class="conv-desc">A4 formatted document</div>
+                </div>
+              </label>
+
+              <label class="conv-opt" data-mode="images-to-pdf">
+                <input type="radio" name="convType" value="images-to-pdf" hidden>
+                <div class="conv-card">
+                  <div class="conv-badge">Images → PDF</div>
+                  <div class="conv-title">Images to PDF</div>
+                  <div class="conv-desc">Merge JPG / PNG / WebP</div>
+                </div>
+              </label>
             </div>
           </div>
 
-          <!-- Single-file upload (PDF conversions) -->
-          <div id="convSingleUpload">
+          <!-- Single-file upload (PDF, DOCX, TXT) -->
+          <div id="convSingleUpload" style="margin-top:20px">
+            <input type="file" id="convFileInput" style="display:none" accept=".pdf,.docx,.txt">
             <div class="upload-area" id="convUploadArea">
-              <input type="file" id="convFileInput" hidden accept=".pdf">
               <div class="upload-content">
                 <div class="upload-icon" style="--uc:#00dcb4;--ub:rgba(0,220,180,.1)">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
                 </div>
-                <p class="upload-title">Drop your PDF here</p>
-                <span class="upload-sub">or <u>click to browse</u></span>
+                <p class="upload-title" id="convUploadTitle">Drop your PDF here</p>
+                <span class="upload-sub" id="convUploadSub">or <u>click to browse</u> — up to 100 MB</span>
               </div>
             </div>
             <div id="convFileName" class="file-badge hidden">
               <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
               <span id="convFileNameText"></span>
-              <button class="clear-btn" id="convClearBtn">&#10005;</button>
+              <button class="clear-btn" id="convClearBtn" type="button">✕</button>
             </div>
           </div>
 
           <!-- Multi-file upload (Images to PDF) -->
-          <div id="convMultiUpload" style="display:none">
+          <div id="convMultiUpload" style="display:none;margin-top:20px">
+            <input type="file" id="convImgFileInput" style="display:none" accept="image/jpeg,image/png,image/webp" multiple>
             <div class="upload-area upload-area--multi" id="convImgUploadArea">
-              <input type="file" id="convImgFileInput" hidden accept="image/jpeg,image/png" multiple>
               <div class="upload-content">
                 <div class="upload-icon" style="--uc:#00dcb4;--ub:rgba(0,220,180,.1)">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                 </div>
-                <p class="upload-title">Drop JPG / PNG images here</p>
-                <span class="upload-sub">or <u>click to browse</u> — select one or more images</span>
+                <p class="upload-title">Drop JPG, PNG, or WebP images here</p>
+                <span class="upload-sub">or <u>click to browse</u> — select one or multiple photos/scans</span>
               </div>
             </div>
             <div id="convImgFileList" class="file-list hidden"></div>
           </div>
 
-          <button class="btn-primary" style="--bc:#00dcb4;--bcs:#5eead4" id="convRunBtn">
-            <span>Convert</span>
+          <button class="btn-primary" style="--bc:#00dcb4;--bcs:#5eead4;margin-top:20px" id="convRunBtn" type="button">
+            <span>Convert File</span>
             <svg viewBox="0 0 20 20" fill="currentColor" width="17"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
           </button>
-          <div id="convProgress" class="progress-simple hidden"><div class="spinner" style="--sc:#00dcb4"></div><span id="convProgressText">Converting&hellip;</span></div>
-          <div id="convError" class="error-msg hidden"></div>
-          <div id="convResult" class="result-section hidden">
+
+          <div id="convProgress" class="progress-simple hidden" style="margin-top:16px">
+            <div class="spinner" style="--sc:#00dcb4"></div>
+            <span id="convProgressText">Converting file…</span>
+          </div>
+
+          <div id="convError" class="error-msg hidden" style="margin-top:16px"></div>
+
+          <div id="convResult" class="result-section hidden" style="margin-top:20px">
             <div class="stat-chips" id="convStats"></div>
             <div class="download-bar">
-              <div class="download-info"><span class="dl-check">&#10003;</span><span id="convResultLabel">Converted file ready</span></div>
-              <a id="convDownloadBtn" class="download-btn" download>Download</a>
+              <div class="download-info">
+                <span class="dl-check">✓</span>
+                <span id="convResultLabel">Converted file is ready</span>
+              </div>
+              <a id="convDownloadBtn" class="download-btn" download style="--bc:#00dcb4;--bcs:#5eead4">Download File</a>
             </div>
           </div>
         </div>
       </section>
 
-    </div>
-  </main>
+      <!-- ═══════════════════ DASHBOARD ═══════════════════ -->
+      <section class="tool-section" id="tool-dashboard">
+        <header class="hero">
+          <div class="hero-tag" style="--tc:#f59e0b;--tb:rgba(245,158,11,.08);--tbd:rgba(245,158,11,.22)">
+            <span class="htag-dot" style="background:#f59e0b"></span>Study Command Center
+          </div>
+          <h1>Your Study <em style="color:#f59e0b">Dashboard</em></h1>
+          <p>Add documents, view personalized study recommendations, and launch AI tools tailored to your goals.</p>
+        </header>
+
+        <!-- 1. Central Document Upload Hub -->
+        <div class="card" style="margin-bottom:20px">
+          <div class="dash-panel-title">Add Files to Study Workspace</div>
+          <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px">Upload textbook chapters, syllabi, lecture slides, or past exam papers. Files are instantly ready for AI summarization, notes, quizzes, and conversion.</p>
+          <input type="file" id="dashFileInput" style="display:none" accept=".pdf,.docx,.txt,image/jpeg,image/png,image/webp" multiple>
+          <div class="upload-area" id="dashUploadArea">
+            <div class="upload-content">
+              <div class="upload-icon" style="--uc:#f59e0b;--ub:rgba(245,158,11,.1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+              </div>
+              <p class="upload-title">Drop your study files here</p>
+              <span class="upload-sub">or <u>click to browse</u> — PDF, DOCX, TXT, or Images</span>
+            </div>
+          </div>
+          <div id="dashUploadNotice" class="file-badge hidden" style="margin-top:12px;background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:var(--amber)">
+            <span id="dashUploadNoticeText">✓ File added to your study workspace library</span>
+          </div>
+        </div>
+
+        <!-- 2. Study Statistics -->
+        <div class="card" style="margin-bottom:20px">
+          <div class="dash-panel-title">Study Statistics</div>
+          <div class="stats-grid">
+            <div class="stat-item"><div class="stat-num" id="statPDFs">0</div><div class="stat-lbl">Files In Workspace</div></div>
+            <div class="stat-item"><div class="stat-num" id="statFlashcards">0</div><div class="stat-lbl">Flashcards Created</div></div>
+            <div class="stat-item"><div class="stat-num" id="statQuizzes">0</div><div class="stat-lbl">Quizzes Taken</div></div>
+            <div class="stat-item"><div class="stat-num" id="statSummaries">0</div><div class="stat-lbl">Summaries Generated</div></div>
+            <div class="stat-item"><div class="stat-num" id="statNotes">0</div><div class="stat-lbl">Notes Created</div></div>
+            <div class="stat-item"><div class="stat-num" id="statBookmarks">0</div><div class="stat-lbl">Bookmarks Saved</div></div>
+          </div>
+        </div>
+
+        <!-- 3. Personalized AI Recommendations -->
+        <div class="card" style="margin-bottom:20px" id="dashRecsCard">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+            <div class="dash-panel-title" style="margin:0">💡 Recommended For You</div>
+            <span class="new-badge" style="background:rgba(245,158,11,.15);color:var(--amber);border-color:rgba(245,158,11,.3)">AI Study Selections</span>
+          </div>
+          <div class="recs-grid" id="dashRecsList">
+            <!-- Dynamically populated via JS based on user activity -->
+          </div>
+        </div>
+
+        <!-- 4. Goal-Based Study Selector -->
+        <div class="card" style="margin-bottom:20px">
+          <div class="dash-panel-title">Study Objectives & Guided Toolkits</div>
+          <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px">Select what you want to achieve today to view the ideal tool selection.</p>
+          <div class="goal-pills" id="goalPills">
+            <button class="goal-pill active" data-goal="exam" type="button">🎯 Exam Prep & Mastery</button>
+            <button class="goal-pill" data-goal="deep" type="button">📚 Deep Understanding</button>
+            <button class="goal-pill" data-goal="revision" type="button">⚡ 1-Day Quick Revision</button>
+            <button class="goal-pill" data-goal="convert" type="button">🛠️ File Conversion & Tools</button>
+          </div>
+          <div class="goal-recommendation-box" id="goalRecBox" style="margin-top:14px">
+            <!-- Dynamically rendered tools for chosen goal -->
+          </div>
+        </div>
+
+        <!-- 5. Active Study Library & Recent History -->
+        <div class="dashboard-grid">
+          <!-- Active Study Library -->
+          <div class="card">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <div class="dash-panel-title" style="margin:0">My Study Library</div>
+              <span id="docCountBadge" class="nav-pill nav-pill--new">0 files</span>
+            </div>
+            <div id="studyLibraryList" class="library-list">
+              <div class="recent-empty">No documents uploaded yet.<br>Drop a PDF or document above to get started.</div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="card">
+            <div class="dash-panel-title">Quick Launch Tools</div>
+            <div class="quick-actions">
+              <button class="qa-btn" style="--dc:#f59e0b" onclick="switchTool('summary')"><span class="qa-dot"></span>Summarize PDF</button>
+              <button class="qa-btn" style="--dc:#60a5fa" onclick="switchTool('askpdf')"><span class="qa-dot"></span>Ask PDF AI</button>
+              <button class="qa-btn" style="--dc:#34d399" onclick="switchTool('notes')"><span class="qa-dot"></span>Generate Notes</button>
+              <button class="qa-btn" style="--dc:#fb923c" onclick="switchTool('quiz')"><span class="qa-dot"></span>Generate Quiz</button>
+              <button class="qa-btn" style="--dc:#e879f9" onclick="switchTool('flashcards')"><span class="qa-dot"></span>Flashcards</button>
+              <button class="qa-btn" style="--dc:#a78bfa" onclick="switchTool('qanalyzer')"><span class="qa-dot"></span>Analyze Papers</button>
+              <button class="qa-btn" style="--dc:#2dd4bf" onclick="switchTool('planner')"><span class="qa-dot"></span>Study Planner</button>
+              <button class="qa-btn" style="--dc:#00dcb4" onclick="switchTool('converter')"><span class="qa-dot"></span>Convert Files</button>
+              <button class="qa-btn" style="--dc:#a78bfa" onclick="switchTool('images')"><span class="qa-dot"></span>Extract Images</button>
+              <button class="qa-btn" style="--dc:#34d399" onclick="switchTool('text')"><span class="qa-dot"></span>Extract Text</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════ AI SUMMARY ════════════════════ -->
+      <section class="tool-section" id="tool-summary">
+        <header class="hero">
+          <div class="hero-tag" style="--tc:#f59e0b;--tb:rgba(245,158,11,.08);--tbd:rgba(245,158,11,.22)">
+            <span class="htag-dot" style="background:#f59e0b"></span>AI-Powered
+          </div>
+          <h1>PDF <em style="color:#f59e0b">Summary</em><br>Generator</h1>
+          <p>Upload a PDF and instantly get a short, detailed, or exam-focused summary.</p>
+        </header>
+        <div class="card">
+          <div class="upload-area" id="sumUploadArea">
+            <input type="file" id="sumFileInput" hidden accept=".pdf">
+            <div class="upload-content">
+              <div class="upload-icon" style="--uc:#f59e0b;--ub:rgba(245,158,11,.1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+              </div>
+              <p class="upload-title">Drop your PDF here</p>
+              <span class="upload-sub">or <u>click to browse</u> — textbooks, notes, papers</span>
+            </div>
+          </div>
+          <div id="sumFileName" class="file-badge hidden">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+            <span id="sumFileNameText"></span>
+            <button class="clear-btn" id="sumClearBtn">✕</button>
+          </div>
+          <div class="option-row" style="margin-top:14px">
+            <label class="option-label">Summary type</label>
+            <div class="mode-tabs">
+              <button class="mode-tab" data-mode="short" id="sumModeShort">Short (5–8 lines)</button>
+              <button class="mode-tab active" data-mode="medium" id="sumModeMedium">Medium</button>
+              <button class="mode-tab" data-mode="detailed" id="sumModeDetailed">Detailed</button>
+              <button class="mode-tab" data-mode="exam" id="sumModeExam">Exam Focus</button>
+            </div>
+          </div>
+          <button class="btn-primary" style="--bc:#f59e0b;--bcs:#fbbf24" id="sumRunBtn">
+            <span>Generate Summary</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="17"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </button>
+          <div id="sumProgress" class="progress-simple hidden"><div class="spinner" style="--sc:#f59e0b"></div><span>Generating summary…</span></div>
+          <div id="sumError" class="error-msg hidden"></div>
+          <div id="sumResult" class="result-section hidden">
+            <div class="stat-chips" id="sumStats"></div>
+            <div id="sumOutput" class="summary-output"></div>
+            <div class="output-actions">
+              <button class="out-btn" id="sumCopyBtn">📋 Copy</button>
+              <a class="out-btn out-btn--primary" id="sumDownloadBtn">⬇ Download Notes</a>
+              <!-- TTS Player -->
+              <div class="tts-player" style="margin-top:0;border:none;padding:0;background:none">
+                <span class="tts-label">Listen:</span>
+                <button class="tts-btn" id="sumTTSBtn">▶ Play</button>
+                <select class="tts-speed" id="sumTTSSpeed">
+                  <option value="0.75">0.75×</option>
+                  <option value="1" selected>1×</option>
+                  <option value="1.25">1.25×</option>
+                  <option value="1.5">1.5×</option>
+                  <option value="2">2×</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════ ASK PDF ═══════════════════════ -->
+      <section class="tool-section" id="tool-askpdf">
+        <header class="hero">
+          <div class="hero-tag" style="--tc:#60a5fa;--tb:rgba(96,165,250,.08);--tbd:rgba(96,165,250,.22)">
+            <span class="htag-dot" style="background:#60a5fa"></span>Chat with your PDF
+          </div>
+          <h1>Ask <em style="color:#60a5fa">PDF</em><br>Get Answers</h1>
+          <p>Upload your PDF and ask any question. Get answers with page references sourced directly from the document.</p>
+        </header>
+        <div class="card">
+          <!-- Upload step -->
+          <div id="askUploadStep">
+            <div class="upload-area" id="askUploadArea">
+              <input type="file" id="askFileInput" hidden accept=".pdf">
+              <div class="upload-content">
+                <div class="upload-icon" style="--uc:#60a5fa;--ub:rgba(96,165,250,.1)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                </div>
+                <p class="upload-title">Drop your PDF here to begin</p>
+                <span class="upload-sub">or <u>click to browse</u></span>
+              </div>
+            </div>
+            <div id="askFileName" class="file-badge hidden">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+              <span id="askFileNameText"></span>
+              <button class="clear-btn" id="askClearBtn">✕</button>
+            </div>
+            <button class="btn-primary" style="--bc:#60a5fa;--bcs:#93c5fd" id="askUploadBtn">
+              <span>Upload PDF to Chat</span>
+              <svg viewBox="0 0 20 20" fill="currentColor" width="17"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="askUploadProgress" class="progress-simple hidden"><div class="spinner" style="--sc:#60a5fa"></div><span>Uploading PDF…</span></div>
+            <div id="askUploadError" class="error-msg hidden"></div>
+          </div>
+
+          <!-- Chat interface (shown after upload) -->
+          <div id="askChatStep" style="display:none">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+              <span id="askDocBadge" class="file-badge" style="position:static;display:inline-flex"></span>
+              <button class="out-btn" id="askChangePDF" style="font-size:12px;padding:5px 10px">Change PDF</button>
+            </div>
+            <div class="chat-container">
+              <div class="chat-history" id="askChatHistory">
+                <div class="chat-empty" id="askChatEmpty">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                  <span>Ask any question about your PDF.<br>Answers will include page references.</span>
+                </div>
+              </div>
+              <div class="chat-input-row">
+                <input class="chat-input" id="askInput" placeholder="e.g. What is normalization?" />
+                <button class="chat-send-btn" id="askSendBtn">➤</button>
+              </div>
+            </div>
+            <div class="suggested-questions">
+              <span style="font-size:11px;color:var(--text-muted)">Try:</span>
+              <button class="sug-btn" data-q="Explain this chapter">Explain this chapter</button>
+              <button class="sug-btn" data-q="What are the important definitions?">Important definitions</button>
+              <button class="sug-btn" data-q="What are the formulas?">What formulas?</button>
+              <button class="sug-btn" data-q="Give me exam questions">Exam questions</button>
+              <button class="sug-btn" data-q="Explain this in simple words">Explain simply</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════ NOTES GENERATOR ══════════════ -->
+      <section class="tool-section" id="tool-notes">
+        <header class="hero">
+          <div class="hero-tag" style="--tc:#34d399;--tb:rgba(52,211,153,.08);--tbd:rgba(52,211,153,.22)">
+            <span class="htag-dot" style="background:#34d399"></span>Auto Notes
+          </div>
+          <h1>Notes <em style="color:#34d399">Generator</em><br>from PDFs</h1>
+          <p>Automatically extract and structure study notes, exam notes, or last-minute revision sheets from any PDF.</p>
+        </header>
+        <div class="card">
+          <div class="upload-area" id="notesUploadArea">
+            <input type="file" id="notesFileInput" hidden accept=".pdf">
+            <div class="upload-content">
+              <div class="upload-icon" style="--uc:#34d399;--ub:rgba(52,211,153,.1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+              </div>
+              <p class="upload-title">Drop your PDF here</p>
+              <span class="upload-sub">or <u>click to browse</u></span>
+            </div>
+          </div>
+          <div id="notesFileName" class="file-badge hidden">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+            <span id="notesFileNameText"></span>
+            <button class="clear-btn" id="notesClearBtn">✕</button>
+          </div>
+          <div class="option-row" style="margin-top:14px">
+            <label class="option-label">Notes type</label>
+            <div class="mode-tabs">
+              <button class="mode-tab active" data-mode="study" id="notesModeStudy">Study Notes</button>
+              <button class="mode-tab" data-mode="exam" id="notesModeExam">Exam Notes</button>
+              <button class="mode-tab" data-mode="revision" id="notesModeRevision">Last-Minute Revision</button>
+            </div>
+          </div>
+          <button class="btn-primary" style="--bc:#34d399;--bcs:#6ee7b7" id="notesRunBtn">
+            <span>Generate Notes</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="17"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </button>
+          <div id="notesProgress" class="progress-simple hidden"><div class="spinner" style="--sc:#34d399"></div><span>Generating notes…</span></div>
+          <div id="notesError" class="error-msg hidden"></div>
+          <div id="notesResult" class="result-section hidden">
+            <div class="stat-chips" id="notesStats"></div>
+            <div id="notesOutput" class="notes-output"></div>
+            <div class="output-actions">
+              <button class="out-btn" id="notesCopyBtn">📋 Copy</button>
+              <a class="out-btn out-btn--primary" id="notesDownloadBtn" download>⬇ Download Notes</a>
+              <div class="tts-player" style="margin-top:0;border:none;padding:0;background:none">
+                <span class="tts-label">Listen:</span>
+                <button class="tts-btn" id="notesTTSBtn">▶ Play</button>
+                <select class="tts-speed" id="notesTTSSpeed">
+                  <option value="0.75">0.75×</option>
+                  <option value="1" selected>1×</option>
+                  <option value="1.25">1.25×</option>
+                  <option value="1.5">1.5×</option>
+                  <option value="2">2×</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════ QUIZ GENERATOR ═══════════════ -->
+      <section class="tool-section" id="tool-quiz">
+        <header class="hero">
+          <div class="hero-tag" style="--tc:#fb923c;--tb:rgba(251,146,60,.08);--tbd:rgba(251,146,60,.22)">
+            <span class="htag-dot" style="background:#fb923c"></span>Test Yourself
+          </div>
+          <h1>Quiz <em style="color:#fb923c">Generator</em><br>from PDFs</h1>
+          <p>Generate MCQ, True/False, and fill-in-the-blank questions directly from your study material.</p>
+        </header>
+        <div class="card">
+          <div class="upload-area" id="quizUploadArea">
+            <input type="file" id="quizFileInput" hidden accept=".pdf">
+            <div class="upload-content">
+              <div class="upload-icon" style="--uc:#fb923c;--ub:rgba(251,146,60,.1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+              </div>
+              <p class="upload-title">Drop your PDF here</p>
+              <span class="upload-sub">or <u>click to browse</u> — textbook, notes, chapter</span>
+            </div>
+          </div>
+          <div id="quizFileName" class="file-badge hidden">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+            <span id="quizFileNameText"></span>
+            <button class="clear-btn" id="quizClearBtn">✕</button>
+          </div>
+          <div class="quiz-settings">
+            <div class="input-group">
+              <label class="input-label">Number of questions</label>
+              <div class="select-wrap">
+                <select id="quizCount" class="input-field" style="padding-right:32px">
+                  <option value="5">5 questions</option>
+                  <option value="10" selected>10 questions</option>
+                  <option value="20">20 questions</option>
+                  <option value="30">30 questions</option>
+                </select>
+                <svg class="select-arrow" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Difficulty</label>
+              <div class="select-wrap">
+                <select id="quizDifficulty" class="input-field" style="padding-right:32px">
+                  <option value="easy">Easy</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="hard">Hard</option>
+                  <option value="exam">Exam Level</option>
+                </select>
+                <svg class="select-arrow" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Question type</label>
+              <div class="select-wrap">
+                <select id="quizType" class="input-field" style="padding-right:32px">
+                  <option value="mcq" selected>Multiple Choice</option>
+                  <option value="truefalse">True / False</option>
+                  <option value="fillblank">Fill in the Blank</option>
+                  <option value="mixed">Mixed</option>
+                </select>
+                <svg class="select-arrow" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+          </div>
+          <button class="btn-primary" style="--bc:#fb923c;--bcs:#fdba74" id="quizRunBtn">
+            <span>Generate Quiz</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="17"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </button>
+          <div id="quizProgress" class="progress-simple hidden"><div class="spinner" style="--sc:#fb923c"></div><span>Generating quiz…</span></div>
+          <div id="quizError" class="error-msg hidden"></div>
+          <!-- Quiz interactive area -->
+          <div id="quizArea" style="display:none">
+            <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizFill"></div></div>
+            <div id="quizQuestionArea"></div>
+            <div class="quiz-nav">
+              <button class="quiz-nav-btn" id="quizPrevBtn" disabled>← Prev</button>
+              <span id="quizCounter" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text-muted)"></span>
+              <button class="quiz-nav-btn quiz-nav-btn--primary" id="quizNextBtn">Next →</button>
+            </div>
+          </div>
+          <div id="quizScoreArea" style="display:none"></div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════ QUESTION ANALYZER ════════════ -->
+      <section class="tool-section" id="tool-qanalyzer">
+        <header class="hero">
+          <div class="hero-tag" style="--tc:#a78bfa;--tb:rgba(167,139,250,.08);--tbd:rgba(167,139,250,.22)">
+            <span class="htag-dot" style="background:#a78bfa"></span>Past Paper Analysis
+          </div>
+          <h1>Question Paper <em style="color:#a78bfa">Analyzer</em></h1>
+          <p>Upload previous-year question papers. Find frequently asked topics, patterns, and chapter-wise distribution.</p>
+        </header>
+        <div class="card">
+          <div class="upload-area" id="qaUploadArea">
+            <input type="file" id="qaFileInput" hidden accept=".pdf">
+            <div class="upload-content">
+              <div class="upload-icon" style="--uc:#a78bfa;--ub:rgba(167,139,250,.1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+              </div>
+              <p class="upload-title">Drop question paper PDF here</p>
+              <span class="upload-sub">or <u>click to browse</u> — previous year papers</span>
+            </div>
+          </div>
+          <div id="qaFileName" class="file-badge hidden">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+            <span id="qaFileNameText"></span>
+            <button class="clear-btn" id="qaClearBtn">✕</button>
+          </div>
+          <button class="btn-primary" style="--bc:#a78bfa;--bcs:#c4b5fd" id="qaRunBtn">
+            <span>Analyze Question Paper</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="17"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </button>
+          <div id="qaProgress" class="progress-simple hidden"><div class="spinner" style="--sc:#a78bfa"></div><span>Analyzing paper…</span></div>
+          <div id="qaError" class="error-msg hidden"></div>
+          <div id="qaResult" class="result-section hidden">
+            <div class="stat-chips" id="qaStats"></div>
+            <div class="analyzer-grid">
+              <div>
+                <div class="dash-panel-title" style="margin-bottom:10px">Frequently Appearing Topics</div>
+                <div class="topic-list" id="qaTopicList"></div>
+              </div>
+              <div>
+                <div class="dash-panel-title" style="margin-bottom:10px">Keyword Cloud</div>
+                <div class="keyword-cloud" id="qaKeywords"></div>
+              </div>
+            </div>
+            <div id="qaRepeatedBlock" style="display:none;margin-top:16px">
+              <div class="dash-panel-title" style="margin-bottom:10px">Repeated Questions Found</div>
+              <div class="repeated-list" id="qaRepeatedList"></div>
+            </div>
+            <div class="disclaimer-note">⚠️ These topics <strong>frequently appeared</strong> in the uploaded paper(s). This is not a prediction of future exam questions.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════ STUDY PLANNER ════════════════ -->
+      <section class="tool-section" id="tool-planner">
+        <header class="hero">
+          <div class="hero-tag" style="--tc:#2dd4bf;--tb:rgba(45,212,191,.08);--tbd:rgba(45,212,191,.22)">
+            <span class="htag-dot" style="background:#2dd4bf"></span>Study Planner
+          </div>
+          <h1>PDF → <em style="color:#2dd4bf">Study Plan</em></h1>
+          <p>Upload your syllabus or textbook PDF. Get a personalised day-by-day study schedule.</p>
+        </header>
+        <div class="card">
+          <div class="upload-area" id="planUploadArea">
+            <input type="file" id="planFileInput" hidden accept=".pdf">
+            <div class="upload-content">
+              <div class="upload-icon" style="--uc:#2dd4bf;--ub:rgba(45,212,191,.1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+              </div>
+              <p class="upload-title">Drop your PDF here</p>
+              <span class="upload-sub">or <u>click to browse</u> — syllabus, textbook, notes</span>
+            </div>
+          </div>
+          <div id="planFileName" class="file-badge hidden">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+            <span id="planFileNameText"></span>
+            <button class="clear-btn" id="planClearBtn">✕</button>
+          </div>
+          <div class="planner-settings">
+            <div class="input-group">
+              <label class="input-label">Exam date (optional)</label>
+              <input type="date" id="planExamDate" class="input-field">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Study hours per day</label>
+              <input type="number" id="planHours" class="input-field" value="3" min="0.5" max="12" step="0.5">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Total days (if no exam date)</label>
+              <input type="number" id="planDays" class="input-field" value="14" min="1" max="60">
+            </div>
+          </div>
+          <button class="btn-primary" style="--bc:#2dd4bf;--bcs:#5eead4" id="planRunBtn">
+            <span>Generate Study Plan</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="17"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </button>
+          <div id="planProgress" class="progress-simple hidden"><div class="spinner" style="--sc:#2dd4bf"></div><span>Generating plan…</span></div>
+          <div id="planError" class="error-msg hidden"></div>
+          <div id="planResult" class="result-section hidden">
+            <div class="stat-chips" id="planStats"></div>
+            <div class="plan-timeline" id="planTimeline"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════ SYLLABUS TRACKER ══════════════ -->
+      <section class="tool-section" id="tool-syllabus">
+        <header class="hero">
+          <div class="hero-tag" style="--tc:#fb7185;--tb:rgba(251,113,133,.08);--tbd:rgba(251,113,133,.22)">
+            <span class="htag-dot" style="background:#fb7185"></span>Syllabus Tracker
+          </div>
+          <h1>Syllabus <em style="color:#fb7185">Tracker</em></h1>
+          <p>Upload your syllabus PDF. Track topics as Not Started, Studying, Completed, or Needs Revision.</p>
+        </header>
+        <div class="card">
+          <div class="upload-area" id="sylUploadArea">
+            <input type="file" id="sylFileInput" hidden accept=".pdf">
+            <div class="upload-content">
+              <div class="upload-icon" style="--uc:#fb7185;--ub:rgba(251,113,133,.1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+              </div>
+              <p class="upload-title">Drop your syllabus PDF here</p>
+              <span class="upload-sub">or <u>click to browse</u></span>
+            </div>
+          </div>
+          <div id="sylFileName" class="file-badge hidden">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+            <span id="sylFileNameText"></span>
+            <button class="clear-btn" id="sylClearBtn">✕</button>
+          </div>
+          <button class="btn-primary" style="--bc:#fb7185;--bcs:#fda4af" id="sylRunBtn">
+            <span>Extract Syllabus Topics</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="17"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </button>
+          <div id="sylProgress" class="progress-simple hidden"><div class="spinner" style="--sc:#fb7185"></div><span>Extracting topics…</span></div>
+          <div id="sylError" class="error-msg hidden"></div>
+          <div id="sylResult" class="result-section hidden">
+            <div class="syllabus-progress">
+              <div class="progress-label"><span>Overall Progress</span><span id="sylPct">0%</span></div>
+              <div class="progress-track"><div class="progress-fill-bar" id="sylProgressBar" style="width:0%"></div></div>
+            </div>
+            <div class="syllabus-list" id="sylList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════ BOOKMARKS ═════════════════════ -->
+      <section class="tool-section" id="tool-bookmarks">
+        <header class="hero">
+          <div class="hero-tag" style="--tc:#fbbf24;--tb:rgba(251,191,36,.08);--tbd:rgba(251,191,36,.22)">
+            <span class="htag-dot" style="background:#fbbf24"></span>Study Markers
+          </div>
+          <h1>My <em style="color:#fbbf24">Bookmarks</em></h1>
+          <p>Save important pages and notes from your PDFs for quick reference during revision.</p>
+        </header>
+        <div class="card">
+          <div class="bookmark-add-form">
+            <div class="dash-panel-title" style="margin-bottom:8px">Add Bookmark</div>
+            <div class="bookmark-form-row">
+              <input class="bookmark-input" id="bmPage" type="number" placeholder="Page number" min="1">
+              <input class="bookmark-input" id="bmDoc" type="text" placeholder="Document name">
+            </div>
+            <input class="bookmark-input" id="bmNote" type="text" placeholder="Note (e.g. Important for exam)">
+            <button class="btn-primary" style="--bc:#fbbf24;--bcs:#fde68a" id="bmAddBtn">
+              <span>+ Add Bookmark</span>
+            </button>
+          </div>
+          <div id="bmList"></div>
+        </div>
+      </section>
+
+  </div>
+</main>
 </div>
-
-<script>
-/* ── File Converter inline logic ── */
-(function(){
-  const radios      = document.querySelectorAll('input[name="convType"]');
-  const singleWrap  = document.getElementById('convSingleUpload');
-  const multiWrap   = document.getElementById('convMultiUpload');
-  const uploadArea  = document.getElementById('convUploadArea');
-  const fileInput   = document.getElementById('convFileInput');
-  const imgArea     = document.getElementById('convImgUploadArea');
-  const imgInput    = document.getElementById('convImgFileInput');
-  const fileBadge   = document.getElementById('convFileName');
-  const fileNameTxt = document.getElementById('convFileNameText');
-  const clearBtn    = document.getElementById('convClearBtn');
-  const imgFileList = document.getElementById('convImgFileList');
-  const runBtn      = document.getElementById('convRunBtn');
-  const progress    = document.getElementById('convProgress');
-  const progTxt     = document.getElementById('convProgressText');
-  const errDiv      = document.getElementById('convError');
-  const result      = document.getElementById('convResult');
-  const resultLabel = document.getElementById('convResultLabel');
-  const dlBtn       = document.getElementById('convDownloadBtn');
-
-  let selectedFile  = null;
-  let selectedImgs  = [];
-
-  function getType(){ return document.querySelector('input[name="convType"]:checked').value; }
-
-  function updateUI(){
-    const t = getType();
-    if(t === 'images-to-pdf'){
-      singleWrap.style.display = 'none';
-      multiWrap.style.display  = '';
-    } else {
-      singleWrap.style.display = '';
-      multiWrap.style.display  = 'none';
-      fileInput.accept = '.pdf';
-    }
-    reset();
-  }
-
-  radios.forEach(r => r.addEventListener('change', updateUI));
-
-  /* ── Single PDF upload ── */
-  uploadArea.addEventListener('click', () => fileInput.click());
-  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
-  uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
-  uploadArea.addEventListener('drop', e => {
-    e.preventDefault(); uploadArea.classList.remove('drag-over');
-    if(e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);
-  });
-  fileInput.addEventListener('change', () => { if(fileInput.files[0]) setFile(fileInput.files[0]); });
-
-  function setFile(f){
-    selectedFile = f;
-    fileNameTxt.textContent = f.name;
-    fileBadge.classList.remove('hidden');
-    resetOutput();
-  }
-
-  clearBtn.addEventListener('click', () => {
-    selectedFile = null;
-    fileInput.value = '';
-    fileBadge.classList.add('hidden');
-    resetOutput();
-  });
-
-  /* ── Multi image upload ── */
-  imgArea.addEventListener('click', () => imgInput.click());
-  imgArea.addEventListener('dragover', e => { e.preventDefault(); imgArea.classList.add('drag-over'); });
-  imgArea.addEventListener('dragleave', () => imgArea.classList.remove('drag-over'));
-  imgArea.addEventListener('drop', e => {
-    e.preventDefault(); imgArea.classList.remove('drag-over');
-    setImages([...e.dataTransfer.files]);
-  });
-  imgInput.addEventListener('change', () => setImages([...imgInput.files]));
-
-  function setImages(files){
-    selectedImgs = files.filter(f => f.type.startsWith('image/'));
-    renderImgList();
-    resetOutput();
-  }
-
-  function renderImgList(){
-    if(!selectedImgs.length){ imgFileList.classList.add('hidden'); return; }
-    imgFileList.classList.remove('hidden');
-    imgFileList.innerHTML = selectedImgs.map((f,i) =>
-      `<div class="file-item">
-        <svg viewBox="0 0 20 20" fill="currentColor" width="15"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/></svg>
-        <span class="fi-name">${f.name}</span>
-        <button class="clear-btn" data-i="${i}">&#10005;</button>
-      </div>`
-    ).join('');
-    imgFileList.querySelectorAll('.clear-btn').forEach(b => b.addEventListener('click', () => {
-      selectedImgs.splice(+b.dataset.i, 1);
-      renderImgList(); resetOutput();
-    }));
-  }
-
-  function reset(){ selectedFile=null; selectedImgs=[]; fileInput.value=''; imgInput.value='';
-    fileBadge.classList.add('hidden'); imgFileList.classList.add('hidden'); renderImgList(); resetOutput(); }
-  function resetOutput(){ errDiv.classList.add('hidden'); result.classList.add('hidden'); progress.classList.add('hidden'); }
-  function showErr(msg){ errDiv.textContent=msg; errDiv.classList.remove('hidden'); }
-
-  /* ── Run conversion ── */
-  runBtn.addEventListener('click', async () => {
-    const t = getType();
-    resetOutput();
-
-    if(t === 'images-to-pdf'){
-      if(!selectedImgs.length){ showErr('Please select at least one image.'); return; }
-    } else {
-      if(!selectedFile){ showErr('Please select a PDF file.'); return; }
-    }
-
-    const fd = new FormData();
-    fd.append('conversion_type', t);
-
-    if(t === 'images-to-pdf'){
-      selectedImgs.forEach(f => fd.append('files', f));
-    } else {
-      fd.append('file', selectedFile);
-    }
-
-    const labels = {
-      'pdf-to-docx':   ['Converting to DOCX\u2026', 'DOCX ready', 'converted.docx'],
-      'pdf-to-txt':    ['Extracting text\u2026',     'TXT ready',  'extracted.txt'],
-      'pdf-to-images': ['Rendering pages\u2026',     'Images ZIP ready', 'pages.zip'],
-      'images-to-pdf': ['Building PDF\u2026',        'PDF ready',  'combined.pdf'],
-    };
-
-    progTxt.textContent = labels[t][0];
-    progress.classList.remove('hidden');
-    runBtn.disabled = true;
-
-    try {
-      const res = await fetch('/convert', { method:'POST', body: fd });
-      progress.classList.add('hidden');
-      if(!res.ok){
-        let msg = 'Conversion failed.';
-        try { const j=await res.json(); msg=j.error||msg; } catch(_){}
-        showErr(msg); return;
-      }
-      const blob = await res.blob();
-      const url  = URL.createObjectURL(blob);
-      resultLabel.textContent = labels[t][1];
-      dlBtn.href = url;
-      dlBtn.download = labels[t][2];
-      result.classList.remove('hidden');
-    } catch(e){
-      progress.classList.add('hidden');
-      showErr('Network error: ' + e.message);
-    } finally {
-      runBtn.disabled = false;
-    }
-  });
-})();
-</script>
 
 <script src="/static/js/script.js"></script>
 </body>

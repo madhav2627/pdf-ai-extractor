@@ -1,13 +1,13 @@
 """
-app.py — Student PDF Toolkit
-────────────────────────────
+app.py — Student PDF Study Workspace
+─────────────────────────────────────
 Tools:
-  1. Image Extractor
-  2. Text Extractor
-  3. PDF Merger
-  4. PDF Splitter
-  5. PDF Compressor
-  6. Flashcard Generator
+  1. Image Extractor          7. AI Summarizer
+  2. Text Extractor           8. Ask PDF
+  3. PDF Merger               9. Notes Generator
+  4. PDF Splitter            10. Quiz Generator
+  5. PDF Compressor          11. Question Paper Analyzer
+  6. Flashcard Generator     12. Study Planner
 """
 
 import os
@@ -27,7 +27,13 @@ from utils.text_extractor   import extract_text
 from utils.pdf_merger       import merge_pdfs
 from utils.pdf_splitter     import split_pdf
 from utils.pdf_compressor   import compress_pdf
-from utils.flashcard_generator import generate_flashcards
+from utils.flashcard_generator  import generate_flashcards
+from utils.ai_summarizer        import summarize_pdf
+from utils.ask_pdf              import answer_question
+from utils.notes_generator      import generate_notes
+from utils.quiz_generator       import generate_quiz
+from utils.question_analyzer    import analyze_question_paper
+from utils.study_planner        import generate_study_plan
 
 # ── Logging ────────────────────────────────────────────────────────────────
 logging.basicConfig(
@@ -377,6 +383,223 @@ def flashcards_route():
     except Exception as exc:
         log.exception("Flashcard error")
         return jsonify({"error": f"Flashcard generation failed: {exc}"}), 500
+    finally:
+        _safe_delete(input_path)
+
+
+# ── 8. AI Summarizer ──────────────────────────────────────────────────────
+
+@app.route("/summarize", methods=["POST"])
+@limiter.limit(config.RATE_LIMIT)
+def summarize_route():
+    _cleanup_old_files()
+    file = request.files.get("file")
+    safe_name, input_path = _save_upload(file)
+    if not input_path:
+        return jsonify({"error": "Only PDF files are accepted."}), 400
+    if not _is_pdf_magic(input_path):
+        _safe_delete(input_path)
+        return jsonify({"error": "Not a valid PDF."}), 400
+    mode = request.form.get("mode", "medium").lower()
+    if mode not in ("short", "medium", "detailed", "exam"):
+        mode = "medium"
+    try:
+        result = summarize_pdf(input_path, mode=mode)
+        log.info("Summarize: mode=%s pages=%d", mode, result["page_count"])
+        return jsonify(result)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 422
+    except Exception as exc:
+        log.exception("Summarize error")
+        return jsonify({"error": f"Summarization failed: {exc}"}), 500
+    finally:
+        _safe_delete(input_path)
+
+
+# ── 9. Ask PDF ─────────────────────────────────────────────────────────────
+
+@app.route("/ask-pdf", methods=["POST"])
+@limiter.limit(config.RATE_LIMIT)
+def ask_pdf_route():
+    _cleanup_old_files()
+    # Support both JSON (question only, reuse cached path) and multipart (with file)
+    if request.is_json:
+        data = request.get_json()
+        question = (data.get("question") or "").strip()
+        pdf_session = (data.get("pdf_session") or "").strip()
+        if not question:
+            return jsonify({"error": "Question is required."}), 400
+        if not pdf_session:
+            return jsonify({"error": "No PDF session. Please upload a PDF first."}), 400
+        safe_session = secure_filename(pdf_session)
+        input_path = os.path.join(config.UPLOAD_FOLDER, safe_session)
+        if not os.path.exists(input_path):
+            return jsonify({"error": "Session expired. Please re-upload the PDF."}), 404
+        try:
+            result = answer_question(input_path, question)
+            return jsonify(result)
+        except ValueError as exc:
+            return jsonify({"error": str(exc)}), 422
+        except Exception as exc:
+            log.exception("Ask PDF error")
+            return jsonify({"error": f"Failed to search PDF: {exc}"}), 500
+    else:
+        file = request.files.get("file")
+        question = (request.form.get("question") or "").strip()
+        safe_name, input_path = _save_upload(file)
+        if not input_path:
+            return jsonify({"error": "Only PDF files are accepted."}), 400
+        if not _is_pdf_magic(input_path):
+            _safe_delete(input_path)
+            return jsonify({"error": "Not a valid PDF."}), 400
+        if not question:
+            # Just upload and return session token for follow-up questions
+            return jsonify({"session": safe_name, "status": "ready"})
+        try:
+            result = answer_question(input_path, question)
+            result["session"] = safe_name
+            return jsonify(result)
+        except ValueError as exc:
+            return jsonify({"error": str(exc)}), 422
+        except Exception as exc:
+            log.exception("Ask PDF error")
+            _safe_delete(input_path)
+            return jsonify({"error": f"Failed to search PDF: {exc}"}), 500
+
+
+# ── 10. Notes Generator ────────────────────────────────────────────────────
+
+@app.route("/generate-notes", methods=["POST"])
+@limiter.limit(config.RATE_LIMIT)
+def notes_route():
+    _cleanup_old_files()
+    file = request.files.get("file")
+    safe_name, input_path = _save_upload(file)
+    if not input_path:
+        return jsonify({"error": "Only PDF files are accepted."}), 400
+    if not _is_pdf_magic(input_path):
+        _safe_delete(input_path)
+        return jsonify({"error": "Not a valid PDF."}), 400
+    mode = request.form.get("mode", "study").lower()
+    if mode not in ("study", "exam", "revision"):
+        mode = "study"
+    try:
+        result = generate_notes(input_path, mode=mode)
+        # Save notes as txt
+        txt_name = f"notes_{safe_name}.txt"
+        txt_path = os.path.join(config.OUTPUT_FOLDER, txt_name)
+        with open(txt_path, "w", encoding="utf-8") as f:
+            f.write(result["notes"])
+        result["download_url"] = f"/download/{txt_name}"
+        log.info("Notes: mode=%s pages=%d", mode, result["page_count"])
+        return jsonify(result)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 422
+    except Exception as exc:
+        log.exception("Notes error")
+        return jsonify({"error": f"Notes generation failed: {exc}"}), 500
+    finally:
+        _safe_delete(input_path)
+
+
+# ── 11. Quiz Generator ─────────────────────────────────────────────────────
+
+@app.route("/generate-quiz", methods=["POST"])
+@limiter.limit(config.RATE_LIMIT)
+def quiz_route():
+    _cleanup_old_files()
+    file = request.files.get("file")
+    safe_name, input_path = _save_upload(file)
+    if not input_path:
+        return jsonify({"error": "Only PDF files are accepted."}), 400
+    if not _is_pdf_magic(input_path):
+        _safe_delete(input_path)
+        return jsonify({"error": "Not a valid PDF."}), 400
+    try:
+        count = int(request.form.get("count", 10))
+    except (ValueError, TypeError):
+        count = 10
+    difficulty = request.form.get("difficulty", "medium").lower()
+    q_type = request.form.get("q_type", "mcq").lower()
+    if difficulty not in ("easy", "medium", "hard", "exam"):
+        difficulty = "medium"
+    if q_type not in ("mcq", "truefalse", "fillblank", "mixed"):
+        q_type = "mcq"
+    try:
+        result = generate_quiz(input_path, count=count, difficulty=difficulty, q_type=q_type)
+        log.info("Quiz: %d questions, difficulty=%s", result["count"], difficulty)
+        return jsonify(result)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 422
+    except Exception as exc:
+        log.exception("Quiz error")
+        return jsonify({"error": f"Quiz generation failed: {exc}"}), 500
+    finally:
+        _safe_delete(input_path)
+
+
+# ── 12. Question Paper Analyzer ────────────────────────────────────────────
+
+@app.route("/analyze-questions", methods=["POST"])
+@limiter.limit(config.RATE_LIMIT)
+def analyze_questions_route():
+    _cleanup_old_files()
+    file = request.files.get("file")
+    safe_name, input_path = _save_upload(file)
+    if not input_path:
+        return jsonify({"error": "Only PDF files are accepted."}), 400
+    if not _is_pdf_magic(input_path):
+        _safe_delete(input_path)
+        return jsonify({"error": "Not a valid PDF."}), 400
+    try:
+        result = analyze_question_paper(input_path)
+        log.info("Q Analyzer: %d topics found", len(result["frequent_topics"]))
+        return jsonify(result)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 422
+    except Exception as exc:
+        log.exception("Question analyzer error")
+        return jsonify({"error": f"Analysis failed: {exc}"}), 500
+    finally:
+        _safe_delete(input_path)
+
+
+# ── 13. Study Planner ──────────────────────────────────────────────────────
+
+@app.route("/study-plan", methods=["POST"])
+@limiter.limit(config.RATE_LIMIT)
+def study_plan_route():
+    _cleanup_old_files()
+    file = request.files.get("file")
+    safe_name, input_path = _save_upload(file)
+    if not input_path:
+        return jsonify({"error": "Only PDF files are accepted."}), 400
+    if not _is_pdf_magic(input_path):
+        _safe_delete(input_path)
+        return jsonify({"error": "Not a valid PDF."}), 400
+    exam_date = request.form.get("exam_date", "").strip() or None
+    try:
+        hours_per_day = float(request.form.get("hours_per_day", 3.0))
+    except (ValueError, TypeError):
+        hours_per_day = 3.0
+    try:
+        total_days = int(request.form.get("total_days", 7))
+    except (ValueError, TypeError):
+        total_days = 7
+    try:
+        result = generate_study_plan(
+            input_path,
+            exam_date=exam_date,
+            hours_per_day=hours_per_day,
+            total_days=total_days,
+        )
+        log.info("Study plan: %d days, %d chapters", result["total_days"], result["chapter_count"])
+        return jsonify(result)
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 422
+    except Exception as exc:
+        log.exception("Study plan error")
+        return jsonify({"error": f"Study plan generation failed: {exc}"}), 500
     finally:
         _safe_delete(input_path)
 
